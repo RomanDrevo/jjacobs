@@ -1,0 +1,6 @@
+[01-Sep-2016 14:50:19 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'String could not be parsed as XML' in /home/jjacobswealth/public_html/register/SpotAPI.php:193
+Stack trace:
+#0 /home/jjacobswealth/public_html/register/SpotAPI.php(193): SimpleXMLElement->__construct('')
+#1 /home/jjacobswealth/public_html/register/index.php(43): SpotAPI->callWithModuleAndCommand('Customer', 'add', Array)
+#2 {main}
+  thrown in /home/jjacobswealth/public_html/register/SpotAPI.php on line 193
