@@ -148,8 +148,8 @@ function onSubmit(){
     $("#errors_container").hide();
     var form = $("#reg-form");
     var
-        name = $(form).find("input[name=name]").val(),
-        lname = $(form).find("input[name=lastName]").val(),
+        firstName = $(form).find("input[name=first_name]").val(),
+        lastName = $(form).find("input[name=last_name]").val(),
         email = $(form).find("input[name=email]").val(),
         phone = $("#phone").intlTelInput("getNumber"),
         campaignId = $("#campaign_id").val(),
@@ -157,8 +157,6 @@ function onSubmit(){
                     
     var errors = "";
 
-    if(name == '' || name.length < 2)
-        errors += "<p class='error'>Please fill in your full name (at least 2 characters).</p>";
 
     var $element = $('input[type="tel"]');
 
@@ -167,7 +165,7 @@ function onSubmit(){
 
     var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-    if( !name || name.length < 1)
+    if( !firstName || firstName.length < 1)
         errors += "<p class='error'>Please fill in your name.</p>";
 
     if (email == '' || !re.test(email))
@@ -207,7 +205,8 @@ function onSubmit(){
             type: "POST",
             url: "register/index.php",
             data: {
-                name: name,
+                first_name: firstName,
+                last_name: lastName,
                 email: email,
                 phone: phone,
                 campaign_id: campaignId,

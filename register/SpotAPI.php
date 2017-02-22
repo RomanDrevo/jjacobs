@@ -13,7 +13,7 @@ class SpotAPI
 	public static $API_URL = 'https://api-spotplatform.ivoryoption.com/Api';
 
 
-	protected $broker = "ivoryoption";//"72option";
+	protected $broker = "72option";//"72option";
 	/**
 	 * API Username
 	 * @var string

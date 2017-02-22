@@ -2,12 +2,13 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 define("SPOT_USER", "allmodulesapi");
-define("SPOT_PASSWORD", "7K7big3WTj");
+define("SPOT_PASSWORD", "ER3qtme7N9");
 define("KICKBOX_APP_ID", "cd098ba3e2ae4452e128cfb7afe980de41b74e4f47fe4cc3123ed1b998108192");
 define("TEXTLOCAL_USERNAME", "marketing@ivoryoption.com");
 define("TEXTLOCAL_HASH", "password123");
 
-if(isset($_POST["name"]) && !empty($_POST["name"])){
+if(isset($_POST["first_name"]) && !empty($_POST["first_name"])){
+
 
     $errors = validateRequest($_POST);
 
@@ -25,26 +26,29 @@ if(isset($_POST["name"]) && !empty($_POST["name"])){
     $location = $spot->getUserLocation();
 
     $args = [
-        "name"          =>  $_POST["name"],
+        "first_name"    =>  $_POST["first_name"],
+        "last_name"     =>  $_POST["last_name"],
         "email"         =>  $_POST["email"],
         "phone"         =>  $_POST["phone"],
         "password"      =>  generate_password(),
-        "country"       =>  $spot->getCountryId(),
+        "country"       =>  225,//$spot->getCountryId(),
         "campaign_id"   =>  $_POST["campaign_id"],
         "sub_campaign"  =>  "jjacobs",
         "a_aid"         =>  $_POST["a_aid"]
     ];
 
+//    var_dump($args);
+//    die;
 
-    $FullName = explode(" ",$args["name"], 2);
-    $args["FirstName"] = $FullName[0];
-    $args["LastName"] = $FullName[1] == "" ? "empty" : $FullName[1];
+//    $FullName = explode(" ",$args["name"], 2);
+//    $args["FirstName"] = $FullName[0];
+//    $args["LastName"] = $FullName[1] == "" ? "empty" : $FullName[1];
 
     $args["phone"] = ltrim($args["phone"], '+');
 
     $response = $spot->callWithModuleAndCommand("Customer", "add", [
-            "FirstName"   =>  $args["FirstName"],
-            "LastName"    =>  $args["LastName"],
+            "FirstName"   =>  $args["first_name"],
+            "LastName"    =>  $args["last_name"],
             "email"       =>  $args["email"],
             "Phone"       =>  $args["phone"],
             "password"    =>  $args["password"],
@@ -133,7 +137,7 @@ if( isset($_POST["email_to_verify"]) && !empty($_POST["email_to_verify"])){
 
 function validateRequest($request){
     $errorsString = "";
-    if(empty($request["name"]) || strlen($request["name"]) < 2)
+    if(empty($request["first_name"]) || strlen($request["first_name"]) < 2)
         $errorsString .= "<p class='error'>Name should be at least 2 characters long.</p>";
 
     if(empty($request["phone"]) || strlen($request["phone"]) < 6)
@@ -149,7 +153,7 @@ function sendWelcomeEmail($params){
 
     # get the email template
     $text = file_get_contents("email.txt");
-    $text = str_replace(["[NAME]", "[USERNAME]", "[PASSWORD]"], [ $params["name"], $params["email"], $params["password"] ], $text);
+    $text = str_replace(["[NAME]", "[USERNAME]", "[PASSWORD]"], [ $params["first_name"], $params["email"], $params["password"] ], $text);
 
     $to = $params["email"];
     $subject = "JJACOBS | Thank you for registering";

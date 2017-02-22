@@ -78,10 +78,11 @@
 					<div class="wrapp_form">
 					<form action="register/index.php" method="POST" id="reg-form">
 						<h3 style="color: #fff;">Start Today</h3>
-						<label>Full Name</label>
-						<input type="text" name="name" placeholder="Full Name" id="name">
+						<label>Your Name</label>
+						<input style="width:32%" type="text" name="first_name" placeholder="First Name" id="first_name">
+                        <input style="width:35%" type="text" name="last_name" placeholder="Last Name" id="last_name">
 						<label>Email</label>
-						<input type="hidden" name="campaign_id" id="campaign_id" value="157">
+						<input type="hidden" name="campaign_id" id="campaign_id" value="72">
 						<input type="hidden" name="a_aid" id="a_aid" value="1234">
 						<input type="text" name="email" placeholder="Email" id="email">
 						<label>Mobile</label>
